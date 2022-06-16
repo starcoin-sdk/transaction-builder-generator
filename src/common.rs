@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use heck::CamelCase;
-use move_core_types::language_storage::TypeTag;
+use starcoin_vm_types::language_storage::TypeTag;
 use serde_reflection::{ContainerFormat, Format, Named, VariantFormat};
 use starcoin_vm_types::transaction::{
     ArgumentABI, ScriptABI, ScriptFunctionABI, TransactionScriptABI, TypeArgumentABI,

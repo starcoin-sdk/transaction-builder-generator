@@ -3,7 +3,7 @@
 
 use crate::common;
 use heck::{CamelCase, ShoutySnakeCase};
-use move_core_types::{
+use starcoin_vm_types::{
     account_address::AccountAddress,
     language_storage::{ModuleId, TypeTag},
 };

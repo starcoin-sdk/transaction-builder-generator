@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::common;
-use move_core_types::{
+use starcoin_vm_types::{
     account_address::AccountAddress,
     language_storage::{ModuleId, TypeTag},
 };
