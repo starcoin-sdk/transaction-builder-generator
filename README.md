@@ -87,12 +87,12 @@ clang++ --std=c++17 -I "$DEST" "$DEST/libra_stdlib.cpp" "$DEST/stdlib_demo.cpp" 
 
 To install Java source packages `com.facebook.serde`, `com.facebook.lcs`, `org.diem.types`, and a class `org.diem.stdlib.Stdlib` into a target directory `$DEST`, run:
 ```bash
-target/debug/generate-transaction-builders \
-    --language java \
+cargo run \
+    -- --language java \
     --module-name org.starcoin.stdlib.Stdlib \
     --with-diem-types "etc/starcoin_types.yml" \
     --target-source-dir "target/java" \
-    "vm/stdlib/compiled/latest/transaction_scripts/abi"
+    "/Users/mac/work/starcoin/starcoin-framework/release/v11/abis"
 ```
 Next, you may copy and execute the [Java demo file](examples/java/StdlibDemo.java) with:
 ```
