@@ -15,6 +15,7 @@ use std::str::FromStr;
 use transaction_builder_generator as buildgen;
 use transaction_builder_generator::is_supported_abi;
 
+
 #[derive(Debug, Parser)]
 enum Language {
     Python3,
@@ -22,10 +23,11 @@ enum Language {
     Cpp,
     Java,
     Dart,
+    Swift
 }
 impl Language {
-    fn variants() -> [&'static str; 5] {
-        ["python3", "rust", "cpp", "java", "dart"]
+    fn variants() -> [&'static str; 6] {
+        ["python3", "rust", "cpp", "java", "dart", "swift"]
     }
 }
 impl FromStr for Language {
@@ -37,6 +39,7 @@ impl FromStr for Language {
             "cpp" => Ok(Language::Cpp),
             "java" => Ok(Language::Java),
             "dart" => Ok(Language::Dart),
+            "swift" => Ok(Language::Swift),
             _ => Err(format!("Unsupported language: {}", s)),
         }
     }
@@ -130,6 +133,9 @@ fn main() {
                     // };
                     // buildgen::dart::output(&mut out, &abis, class_name).unwrap()
                     panic!("Code generation in dart requires --target_source_dir");
+                },
+                Language::Swift =>{
+                    panic!("Code generation in swift requires --target_source_dir");
                 }
             }
             return;
@@ -149,6 +155,7 @@ fn main() {
                 Language::Cpp => Box::new(serdegen::cpp::Installer::new(install_dir.clone())),
                 Language::Java => Box::new(serdegen::java::Installer::new(install_dir.clone())),
                 Language::Dart => Box::new(serdegen::dart::Installer::new(install_dir.clone())),
+                Language::Swift => Box::new(serdegen::swift::Installer::new(install_dir.clone())),
             };
 
         match options.language {
@@ -174,6 +181,8 @@ fn main() {
                 "org.starcoin.types".to_string(),
                 vec!["org", "starcoin", "types"],
             ),
+            Language::Swift => ("StarcoinTypes".to_string(),vec!["StarcoinTypes"]),
+
             _ => ("starcoin_types".to_string(), vec!["starcoin_types"]),
         };
         let custom_diem_code = buildgen::read_custom_code_from_paths(
@@ -201,6 +210,7 @@ fn main() {
             Language::Cpp => Box::new(buildgen::cpp::Installer::new(install_dir)),
             Language::Java => Box::new(buildgen::java::Installer::new(install_dir)),
             Language::Dart => Box::new(buildgen::dart::Installer::new(install_dir)),
+            Language::Swift => Box::new(buildgen::swift::Installer::new(install_dir)),
         };
 
     if let Some(name) = options.module_name {

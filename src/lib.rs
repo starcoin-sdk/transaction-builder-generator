@@ -17,6 +17,9 @@ pub mod python3;
 /// Support for code-generation in Rust.
 pub mod rust;
 
+/// Support for code-generation in Rust.
+pub mod swift;
+
 /// Internals shared between languages.
 mod common;
 
